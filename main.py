@@ -1,36 +1,41 @@
-"""Entry for make.fun's "The Tired Dark Lord: A 100-Word Villain Monologue".
+"""Entry for make.fun competition: u-kevin-the-tired-dark-lord-a-100-word-villain-58b4f3cb.
 
 Running this program writes the entry text to /output/entry.txt.
 """
 
 from pathlib import Path
 
-OPENING = (
-    "Ten thousand years I have kept this throne warm for a prophecy that "
-    "keeps rescheduling. My armies stand ready. My curses are polished. "
-)
-DEFLECTION = (
-    "Somewhere below, a hero is climbing my tower, and I find myself "
-    "hoping he takes the stairs slowly. Not from fear. The torches "
-    "gutter, the hall echoes, and every triumph tastes of cold iron "
-    "and old smoke. "
-)
-RESOLVE = (
-    "When he arrives, I shall rise, I shall thunder, I shall give him "
-    "the speech — the good one, with the laugh. "
-)
-CLOSE = "Then, win or lose, perhaps... rest. Even darkness, hero, must eventually close its eyes."
-
-ENTRY = OPENING + DEFLECTION + RESOLVE + CLOSE
-
 OUTPUT_PATH = Path("/output/entry.txt")
 
+OPENING = (
+    "Ten thousand years I have kept this throne warm for a prophecy that keeps "
+    "rescheduling. My armies stand ready. My curses are polished. Somewhere "
+    "below, a hero is climbing my tower, and I find myself hoping he takes "
+    "the stairs slowly. Not from fear. "
+)
+MIDDLE = (
+    "The torches gutter, the hall echoes, and every triumph tastes of cold "
+    "iron and old smoke. When he arrives, I shall rise, I shall thunder, I "
+    "shall give him the speech — the good one, with the laugh. "
+)
+LANDING = (
+    "Then, win or lose, perhaps... rest. Even darkness, hero, must eventually "
+    "close its eyes."
+)
 
-def write_entry(path: Path = OUTPUT_PATH) -> None:
-    """Write the entry text to the output file, with no trailing newline."""
+ENTRY = OPENING + MIDDLE + LANDING
+
+
+def write_entry(text: str, path: Path) -> None:
+    """Write *text* to *path* as UTF-8, with no trailing newline."""
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(ENTRY, encoding="utf-8")
+    path.write_text(text, encoding="utf-8")
+
+
+def main() -> None:
+    """Write the entry text to the fixed output path."""
+    write_entry(ENTRY, OUTPUT_PATH)
 
 
 if __name__ == "__main__":
-    write_entry()
+    main()
